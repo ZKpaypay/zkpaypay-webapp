@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logoIcon from "../public/icon.png";
 
 export default function LoginHeader() {
   return (
