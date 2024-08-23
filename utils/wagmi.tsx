@@ -15,8 +15,6 @@ import { createConnector } from "@wagmi/core";
 // get from https://dashboard.web3auth.io
 const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID!;
 
-console.log(process.env.NEXT_PUBLIC_CABINET_SCROLL_SEPORIA_RPC_JSON_API_KEY!);
-
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: "0x" + scrollSepolia.id.toString(16),
