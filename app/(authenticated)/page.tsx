@@ -55,8 +55,9 @@ function Page() {
           {/* 決済履歴表示エリア */}
           <div className="mt-12">
             <h2 className="text-l font-bold">Tx Record</h2>
-            {sampleTxRecord.map((txRecord) => (
+            {sampleTxRecord.map((txRecord, index) => (
               <TxRecordRow
+                key={index}
                 senderAddress={txRecord.senderAddress}
                 date={txRecord.date}
                 amount={txRecord.amount}
