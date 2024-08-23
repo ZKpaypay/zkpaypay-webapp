@@ -1,6 +1,7 @@
 import { Providers } from "@/utils/providers";
-import LoginHeader from "../_components/login-header";
+import LoginHeader from "../../_components/login-header";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import "@rainbow-me/rainbowkit/styles.css";
 
 export default function Page() {
   return (
