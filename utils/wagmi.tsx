@@ -32,7 +32,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
 
 const web3AuthInstance = new Web3Auth({
   clientId,
-  web3AuthNetwork: WEB3AUTH_NETWORK.TESTNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
   privateKeyProvider,
   uiConfig: {
     mode: "dark",
