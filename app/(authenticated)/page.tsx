@@ -4,6 +4,7 @@ import { useAccount } from "wagmi";
 import WalletAddressField from "../_components/wallet-address-field";
 import MoneyComponent from "../_components/money";
 import TxRecordRow from "../_components/tx-record-row";
+import { useRouter } from "next/navigation";
 
 interface TxRecord {
   senderAddress: string;
@@ -16,8 +17,9 @@ function Page() {
   const balance = 1000;
 
   // isConnectedがfalseの時/loginのページにリダイレクト
+  const router = useRouter();
   if (!account.isConnected) {
-    window.location.href = "/login";
+    router.push("/login");
   }
 
   // TODO: 本来はAPIから取得するが、サンプルデータを使用

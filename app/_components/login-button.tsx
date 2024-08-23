@@ -2,14 +2,15 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import "@rainbow-me/rainbowkit/styles.css";
+import { useRouter } from "next/navigation";
 
 export default function LoginButton() {
   const account = useAccount();
+  const router = useRouter();
 
-  // isConnectedがfalseの時/loginのページにリダイレクト
+  // isConnectedがfalseの時/のページにリダイレクト
   if (account.isConnected) {
-    // TODO: fix redirect method
-    window.location.href = "/";
+    router.push("/");
   }
 
   return account.isConnected ? (
