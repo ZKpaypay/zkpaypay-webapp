@@ -9,21 +9,22 @@ import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3Auth } from "@web3auth/modal";
 import { Web3AuthConnector } from "@web3auth/web3auth-wagmi-connector";
 import { http } from "viem";
-import { sepolia } from "viem/chains";
+import { scrollSepolia } from "viem/chains";
 import { createConnector } from "@wagmi/core";
 
 // get from https://dashboard.web3auth.io
 const clientId = process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID!;
 
+console.log(process.env.NEXT_PUBLIC_CABINET_SCROLL_SEPORIA_RPC_JSON_API_KEY!);
+
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0x" + sepolia.id.toString(16),
-  // rpcTarget: process.env.NEXT_PUBLIC_CABINET_SCROLL_SEPORIA_RPC_JSON_API_KEY!,
-  rpcTarget: sepolia.rpcUrls.default.http[0],
-  displayName: sepolia.name,
-  blockExplorer: sepolia.blockExplorers.default.url,
-  ticker: sepolia.nativeCurrency?.symbol,
-  tickerName: sepolia.nativeCurrency?.name,
+  chainId: "0x" + scrollSepolia.id.toString(16),
+  rpcTarget: process.env.NEXT_PUBLIC_CABINET_SCROLL_SEPORIA_RPC_JSON_API_KEY!,
+  displayName: scrollSepolia.name,
+  blockExplorer: scrollSepolia.blockExplorers.default.url,
+  ticker: scrollSepolia.nativeCurrency?.symbol,
+  tickerName: scrollSepolia.nativeCurrency?.name,
 };
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
@@ -68,9 +69,9 @@ export const rainbowWeb3AuthConnector = (): Wallet => ({
 export const config = getDefaultConfig({
   appName: "zkpPay",
   projectId: "zkppay-ethtokyo-2024",
-  chains: [sepolia],
+  chains: [scrollSepolia],
   transports: {
-    [sepolia.id]: http(),
+    [scrollSepolia.id]: http(),
   },
   wallets: [
     {
