@@ -22,6 +22,20 @@ const modalStyle = {
 
 export default function WalletAddressField({ address }: { address: string }) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [secretKey, setSecretKey] = useState("");
+
+  /**
+   * モーダルをオープンする前に秘密鍵を生成する
+   */
+  const isModalOpen = () => {
+    // 暗号化方式はシーザー暗号を使用
+    // 1~25の乱数を生成
+    const random = Math.floor(Math.random() * 25) + 1;
+    setSecretKey(random.toString());
+    setIsOpen(true);
+
+    // TODO: ここでコントラクトに秘密鍵を送信する処理を実装
+  };
 
   return (
     <form className="w-full max-w-sm">
@@ -39,7 +53,7 @@ export default function WalletAddressField({ address }: { address: string }) {
             height="40"
             src={"/mage_qr-code.png"}
             alt="qr_icon"
-            onClick={() => setIsOpen(true)}
+            onClick={() => isModalOpen()}
           ></Image>
           <Modal
             isOpen={modalIsOpen}
@@ -72,7 +86,10 @@ export default function WalletAddressField({ address }: { address: string }) {
             </button>
 
             <div className="mt-10 flex justify-center text-center">
-              <QrCodeViewer address={address}></QrCodeViewer>
+              <QrCodeViewer
+                address={address}
+                secretKey={secretKey}
+              ></QrCodeViewer>
             </div>
           </Modal>
         </div>

@@ -7,7 +7,7 @@ import PrimaryButton from "../buttons/primary-button";
 export default function QrCodeReader({
   onQRReadCompleteButton,
 }: {
-  onQRReadCompleteButton: (address: string) => void;
+  onQRReadCompleteButton: (qrData: string) => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);

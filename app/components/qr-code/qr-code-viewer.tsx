@@ -1,10 +1,17 @@
 import { QRCodeCanvas } from "qrcode.react";
 
-export default function QrCodeViewer({ address }: { address: string }) {
+export default function QrCodeViewer({
+  address,
+  secretKey,
+}: {
+  address: string;
+  secretKey: string;
+}) {
+  const qrCodeValue = `${address},${secretKey}`;
   return (
     <div className="p-8 bg-white">
       <QRCodeCanvas
-        value={address}
+        value={qrCodeValue}
         style={{
           width: "50vw",
           height: "50vw",

@@ -21,9 +21,11 @@ function SendTransaction() {
   const router = useRouter();
   const routerParams = useSearchParams();
   const receiverSubDomain = routerParams.get("address");
+  const secretKey = routerParams.get("secretKey");
   const supabase = createClient();
 
   const [senderSubDomain, setSenderSubDomain] = useState("");
+  const [receiverAddress, setReceiverAddress] = useState("");
   const [sendAmount, setSendAmount] = useState(100);
   const [isLoading, setIsLoading] = useState(false);
   const [isTransactionComplete, setIsTransactionComplete] = useState(false);
@@ -42,6 +44,20 @@ function SendTransaction() {
       });
   }, [receiverSubDomain]);
 
+  useEffect(() => {
+    // 受信者（送信相手）のウォレットアドレスを取得
+    supabase
+      .from("accounts")
+      .select("wallet_address")
+      .eq("sub_domain", receiverSubDomain!)
+      .single()
+      .then((response) => {
+        if (response.data) {
+          setReceiverAddress(response.data.wallet_address || "");
+        }
+      });
+  }, [receiverSubDomain]);
+
   /**
    * 送金処理
    */
@@ -55,6 +71,9 @@ function SendTransaction() {
         amount: sendAmount,
       },
     ]);
+
+    // TODO: ここにコントラクトの実行処理を追加
+    console.log("Send Transaction", receiverAddress, secretKey);
 
     setIsLoading(false);
     setIsTransactionComplete(true);

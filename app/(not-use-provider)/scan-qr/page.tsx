@@ -4,8 +4,10 @@ import { useRouter } from "next/navigation";
 
 export default function ScanQr() {
   const router = useRouter();
-  const onQRReadCompleteButton = (address: string) => {
-    router.push(`/send-transaction?address=${address}`);
+  const onQRReadCompleteButton = (qrData: string) => {
+    // 送金先のアドレス,SecretKeyなので分割
+    const [address, secretKey] = qrData.split(",");
+    router.push(`/send-transaction?address=${address}&secretKey=${secretKey}`);
   };
 
   return <QrCodeReader onQRReadCompleteButton={onQRReadCompleteButton} />;
