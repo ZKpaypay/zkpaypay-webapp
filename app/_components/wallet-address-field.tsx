@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function WalletAddressField({ address }: { address: string }) {
   return (
     <form className="w-full max-w-sm">
@@ -8,6 +10,14 @@ export default function WalletAddressField({ address }: { address: string }) {
           value={address}
           placeholder="例: test.zkpayuser.eth"
         />
+        <div className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out">
+          <Image
+            width="40"
+            height="40"
+            src={"/mage_qr-code.png"}
+            alt="qr_icon"
+          ></Image>
+        </div>
       </div>
     </form>
   );
