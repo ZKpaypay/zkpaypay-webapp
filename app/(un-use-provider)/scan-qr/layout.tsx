@@ -7,7 +7,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
         <title>ZKpaypay</title>
       </head>
       <body>
-        <main className="mx-8 flex justify-center flex-col">{children}</main>
+        <main className="flex justify-center flex-col">{children}</main>
       </body>
     </html>
   );

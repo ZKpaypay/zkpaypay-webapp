@@ -18,8 +18,6 @@ export default function QrCodeReader({
     const constraints = {
       video: {
         facingMode: "environment",
-        width: { ideal: 300 },
-        height: { ideal: 300 },
       },
     };
 
@@ -101,7 +99,7 @@ export default function QrCodeReader({
             />
             <canvas
               ref={canvasRef}
-              className="absolute left-0 top-0 h-screen w-screen"
+              className="absolute left-0 top-0 h-full w-full"
             />
           </div>
         </div>
