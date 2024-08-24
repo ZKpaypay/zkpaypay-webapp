@@ -5,9 +5,9 @@ import SecondaryButton from "../buttons/secondary-button";
 import PrimaryButton from "../buttons/primary-button";
 
 export default function QrCodeReader({
-  onQRReadCompleteButton,
+  onQRReadComplete,
 }: {
-  onQRReadCompleteButton: (qrData: string) => void;
+  onQRReadComplete: (qrData: string) => void;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -62,7 +62,7 @@ export default function QrCodeReader({
         );
         if (qrCodeData) {
           // スキャンされた内容を確認する
-          onQRReadCompleteButton(qrCodeData.data);
+          onQRReadComplete(qrCodeData.data);
           return;
         }
         setTimeout(scanQrCode, 100);
