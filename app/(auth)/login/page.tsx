@@ -1,4 +1,3 @@
-import { Providers } from "@/utils/providers";
 import LoginHeader from "../../_components/login-header";
 import "@rainbow-me/rainbowkit/styles.css";
 import LoginButton from "@/app/_components/login-button";
@@ -17,9 +16,7 @@ export default function Page() {
           <span className="text-[#0027F3]">Connect your wallet</span>
         </div>
         <div>
-          <Providers>
-            <LoginButton />
-          </Providers>
+          <LoginButton />
         </div>
       </div>
     </div>
