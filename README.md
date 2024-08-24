@@ -19,6 +19,10 @@
 NEXT_PUBLIC_CABINET_SCROLL_SEPORIA_RPC_JSON_API_KEY=${JSON API Key}
 # https://dashboard.web3auth.io/ で登録したアプリケーションの Client Secret
 NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=${Client ID}
+
+# Supabase の設定
+NEXT_PUBLIC_SUPABASE_URL=${Supabase URL}
+NEXT_PUBLIC_SUPABASE_ANON_KEY=${Supabase Anon Key}
 ```
 
 以下のコマンドで開発環境を起動する。
@@ -34,6 +38,12 @@ npm run dev
 - scroll (Sepolia)
 - cabinet
 
-```
+## 開発者向け
 
+### supabase からスキーマの取得
+
+以下のコマンドを実行し、`database.types.ts`を生成する。
+
+```bash
+supabase gen types --lang=typescript --project-id xttxgubekhgwkbvseoxw --schema public > database.types.ts
 ```
