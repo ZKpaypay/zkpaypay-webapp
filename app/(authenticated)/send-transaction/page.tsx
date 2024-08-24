@@ -1,9 +1,19 @@
 "use client";
 import PrimaryButton from "@/app/_components/buttons/primary-button";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
-export default function SendTransaction() {
+// useSearchParamsを利用するためにSuspenseでラップする
+// https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+export default function SendTransactionPage() {
+  return (
+    <Suspense>
+      <SendTransaction />
+    </Suspense>
+  );
+}
+
+function SendTransaction() {
   const router = useRouter();
   const routerParams = useSearchParams();
   const address = routerParams.get("address");
