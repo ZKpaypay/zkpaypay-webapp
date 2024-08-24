@@ -64,7 +64,7 @@ function Page() {
 
   return (
     <>
-      <div className="flex justify-center items-center flex-col">
+      <div className="mt-32 flex justify-center items-center flex-col">
         <div className="min-w-[400px]">
           <WalletAddressField address={subDomain} />
           {/* 残高表示エリア */}

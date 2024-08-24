@@ -12,12 +12,10 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Providers>
-          <main className="flex justify-center flex-col">
-            <div className="flex justify-end">
-              <ConnectButton />
-            </div>
-            {children}
-          </main>
+          <div className="fixed z-50 right-8 top-4">
+            <ConnectButton />
+          </div>
+          <main className="flex justify-center flex-col">{children}</main>
         </Providers>
       </body>
     </html>
