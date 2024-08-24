@@ -7,7 +7,7 @@ import TxRecordRow from "../_components/tx-record-row";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import QrCodeReader from "../_components/qr-code-reader";
+import Link from "next/link";
 
 interface TxRecord {
   senderAddress: string;
@@ -88,9 +88,27 @@ function Page() {
             ))}
           </div>
         </div>
-        <div className="bg-white p-4 rounded-md">
-          <QrCodeReader />
-        </div>
+        <Link
+          href="/scan-qr"
+          className="fixed z-50 bottom-10 right-10 p-5
+  border-2 bg-[#0027F3] rounded-full cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            color="white"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            className="size-8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </Link>
       </div>
     </>
   );

@@ -2,10 +2,13 @@
 import jsQR from "jsqr";
 import React, { useRef, useState, useEffect, FC } from "react";
 import SecondaryButton from "./buttons/secondary-button";
-import { start } from "repl";
+import PrimaryButton from "./buttons/primary-button";
 
-type Props = {};
-const QrCodeReader: FC<Props> = () => {
+export default function QrCodeReader({
+  onQRReadCompleteButton,
+}: {
+  onQRReadCompleteButton: (address: string) => void;
+}) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [result, setResult] = useState("");
@@ -70,8 +73,17 @@ const QrCodeReader: FC<Props> = () => {
     }
   };
 
+  /**
+   * 送金画面に遷移
+   */
+  const onSendTransaction = () => {
+    onQRReadCompleteButton(result);
+  };
+
+  /**
+   * QRコードを再スキャンする
+   */
   const onReScanButtonClick = () => {
-    console.log(result);
     setResult("");
     setError("");
   };
@@ -80,18 +92,16 @@ const QrCodeReader: FC<Props> = () => {
     <div>
       {!result && (
         <div className="flex justify-center">
-          <div className="relative h-[300px] w-[300px]">
+          <div className="relative h-screen w-screen">
             <video
               ref={videoRef}
               autoPlay
               playsInline
-              className="absolute left-0 top-0 -z-50 h-[300px] w-[300px]"
+              className="absolute left-0 top-0 -z-50"
             />
             <canvas
               ref={canvasRef}
-              width="300"
-              height="300"
-              className="absolute left-0 top-0"
+              className="absolute left-0 top-0 h-screen w-screen"
             />
           </div>
         </div>
@@ -102,6 +112,14 @@ const QrCodeReader: FC<Props> = () => {
             <p className="text-2xl mb-4">QRコードを読み取りました</p>
             <p className="text-lg mb-4">送信先アドレス: {result}</p>
           </div>
+          <PrimaryButton
+            buttonLabel="Send Your Money"
+            onClick={() => {
+              onSendTransaction();
+            }}
+            isLoading={false}
+          />
+
           <SecondaryButton
             buttonLabel="Re Scan QR"
             onClick={() => onReScanButtonClick()}
@@ -111,6 +129,4 @@ const QrCodeReader: FC<Props> = () => {
       {error && <p className="text-center text-xs text-red-500">{error}</p>}
     </div>
   );
-};
-
-export default QrCodeReader;
+}
