@@ -1,6 +1,8 @@
 # ZKpaypay
 
-- [Demo Page](https://zkpaypay.vercel.app/)
+[Demo Page](https://zkpaypay.vercel.app/)
+
+[!['Demo movie']('')](https://www.youtube.com/watch?v=48rIRuYaeLU)
 
 Deployment is done by updating the forked repository below and deploying to Vercel.
 
@@ -8,11 +10,22 @@ Deployment is done by updating the forked repository below and deploying to Verc
 
 ## Overview
 
+Akindo description page is here
+
+- [ZKpaypay | Akindo](https://app.akindo.io/communities/nPj6o40NdilJG4ZA/products/lrjxJG6wACnDw0Vo).
+
 ### System Architecture
 
 The overall architecture is as follows. This repository corresponds to the Frontend in the diagram.
 
 ![System Architecture](./docs/arch.png)
+
+Contracts deployed on the Sepolia Scroll testnet are as follows.
+
+| Contract Name | Address                                      | URL                                                                                             |
+| ------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Scroll JPY    | `0xba3e23dd4263ecfaf6e861a0a2c468c2ee2c3186` | [ScrollScan](https://sepolia.scrollscan.com/token/0xba3e23dd4263ecfaf6e861a0a2c468c2ee2c3186)   |
+| ZKpaypay      | `0x5C848dcFf45257c7758dEdF1e975026b1dfE2db1` | [ScrollScan](https://sepolia.scrollscan.com/address/0x5C848dcFf45257c7758dEdF1e975026b1dfE2db1) |
 
 For information about contracts, please refer to the following repository.
 
