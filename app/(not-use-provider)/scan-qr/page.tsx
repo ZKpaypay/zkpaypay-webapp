@@ -7,7 +7,15 @@ export default function ScanQr() {
   const onQRReadComplete = (qrData: string) => {
     // 送金先のアドレス,SecretKeyなので分割
     const [address, secretKey] = qrData.split(",");
-    router.push(`/send-transaction?address=${address}&secretKey=${secretKey}`);
+    if (!address || !secretKey) {
+      alert("Invalid QR code");
+      router.push("/scan-qr");
+      return;
+    } else {
+      router.push(
+        `/send-transaction?address=${address}&secretKey=${secretKey}`
+      );
+    }
   };
 
   return <QrCodeReader onQRReadComplete={onQRReadComplete} />;

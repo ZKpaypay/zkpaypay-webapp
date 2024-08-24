@@ -4,7 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, use, useEffect, useState } from "react";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
-import { useAccount } from "wagmi";
+import { useAccount, useWriteContract } from "wagmi";
+import CaesarCipher from "@/utils/cipher";
 
 // useSearchParamsを利用するためにSuspenseでラップする
 // https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
@@ -17,6 +18,7 @@ export default function SendTransactionPage() {
 }
 
 function SendTransaction() {
+  const { data: hash, isPending, writeContract } = useWriteContract();
   const account = useAccount();
   const router = useRouter();
   const routerParams = useSearchParams();
@@ -73,7 +75,15 @@ function SendTransaction() {
     ]);
 
     // TODO: ここにコントラクトの実行処理を追加
-    console.log("Send Transaction", receiverAddress, secretKey);
+    const originalPhrase = `${receiverAddress},${sendAmount}`;
+    const _secretPhrase = CaesarCipher(originalPhrase, Number(secretKey));
+    console.log("Send Transaction", originalPhrase, secretKey, _secretPhrase);
+    // writeContract({
+    //   address: account.address!,
+    //   abi: abi, // TODO: 変更の可能性あり
+    //   functionName: "sendTransaction", // TODO: 変更の可能性あり
+    //   args: [_secretPhrase],
+    // });
 
     setIsLoading(false);
     setIsTransactionComplete(true);

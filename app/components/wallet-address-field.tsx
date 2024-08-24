@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import Modal from "react-modal";
 import QrCodeViewer from "./qr-code/qr-code-viewer";
+import { useWriteContract } from "wagmi";
 
 const modalStyle = {
   overlay: {
@@ -21,6 +22,7 @@ const modalStyle = {
 };
 
 export default function WalletAddressField({ address }: { address: string }) {
+  const { data: hash, isPending, writeContract } = useWriteContract();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [secretKey, setSecretKey] = useState("");
 
@@ -31,10 +33,18 @@ export default function WalletAddressField({ address }: { address: string }) {
     // 暗号化方式はシーザー暗号を使用
     // 1~25の乱数を生成
     const random = Math.floor(Math.random() * 25) + 1;
-    setSecretKey(random.toString());
+    const _secretKey = random.toString();
+    setSecretKey(_secretKey);
     setIsOpen(true);
 
     // TODO: ここでコントラクトに秘密鍵を送信する処理を実装
+    console.log("Register Receiver SecretKey", secretKey);
+    // writeContract({
+    //   address: address,
+    //   abi: abi, // TODO: 変更の可能性あり
+    //   functionName: "registerKey", // TODO: 変更の可能性あり
+    //   args: [_secretKey],
+    // });
   };
 
   return (
