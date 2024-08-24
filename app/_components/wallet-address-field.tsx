@@ -9,6 +9,7 @@ export default function WalletAddressField({ address }: { address: string }) {
           type="text"
           value={address}
           placeholder="例: test.zkpayuser.eth"
+          disabled
         />
         <div className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out">
           <Image

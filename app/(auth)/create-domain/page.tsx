@@ -38,10 +38,11 @@ export default function CreateDomainPage() {
   const [isLoading, setIsLoading] = useState(false);
   const onClickRegister = async () => {
     setIsLoading(true);
+    const fullSubDomain = `${subDomain}.zkpaypay.eth`;
     await supabase.from("accounts").insert([
       {
         wallet_address: account.address,
-        sub_domain: subDomain,
+        sub_domain: fullSubDomain,
       },
     ]);
 

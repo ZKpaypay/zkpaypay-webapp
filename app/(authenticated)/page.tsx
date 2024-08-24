@@ -5,6 +5,8 @@ import WalletAddressField from "../_components/wallet-address-field";
 import MoneyComponent from "../_components/money";
 import TxRecordRow from "../_components/tx-record-row";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
 
 interface TxRecord {
   senderAddress: string;
@@ -13,7 +15,10 @@ interface TxRecord {
 }
 
 function Page() {
+  const [subDomain, setSubDomain] = useState("");
+
   const account = useAccount();
+  const supabase = createClient();
   const balance = 1000;
 
   // isConnectedがfalseの時/loginのページにリダイレクト
@@ -21,6 +26,21 @@ function Page() {
   if (!account.isConnected) {
     router.push("/login");
   }
+
+  useEffect(() => {
+    supabase
+      .from("accounts")
+      .select("*")
+      .eq("wallet_address", account.address!)
+      .then((response) => {
+        if (response.data && response.data.length > 0) {
+          setSubDomain(response.data[0].sub_domain!);
+        } else {
+          // アカウントが作成されていない場合は/create-domainにリダイレクト
+          router.push("/create-domain");
+        }
+      });
+  }, []);
 
   // TODO: 本来はAPIから取得するが、サンプルデータを使用
   const sampleTxRecord: TxRecord[] = [
@@ -45,7 +65,7 @@ function Page() {
     <>
       <div className="flex justify-center items-center flex-col">
         <div className="min-w-[400px]">
-          <WalletAddressField address={"test.zkpayuser.eth"} />
+          <WalletAddressField address={subDomain} />
           {/* 残高表示エリア */}
           <div className="mt-4">
             <p>S-JPY Balance</p>
