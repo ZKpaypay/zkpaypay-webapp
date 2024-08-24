@@ -11,7 +11,6 @@ export default function QrCodeReader({
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [result, setResult] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -44,7 +43,7 @@ export default function QrCodeReader({
         tracks.forEach((track) => track.stop());
       }
     };
-  }, [result]);
+  }, []);
 
   const scanQrCode = () => {
     const canvas = canvasRef.current;
@@ -63,7 +62,7 @@ export default function QrCodeReader({
         );
         if (qrCodeData) {
           // スキャンされた内容を確認する
-          setResult(qrCodeData.data);
+          onQRReadCompleteButton(qrCodeData.data);
           return;
         }
         setTimeout(scanQrCode, 100);
@@ -71,59 +70,22 @@ export default function QrCodeReader({
     }
   };
 
-  /**
-   * 送金画面に遷移
-   */
-  const onSendTransaction = () => {
-    onQRReadCompleteButton(result);
-  };
-
-  /**
-   * QRコードを再スキャンする
-   */
-  const onReScanButtonClick = () => {
-    setResult("");
-    setError("");
-  };
-
   return (
     <div>
-      {!result && (
-        <div className="flex justify-center">
-          <div className="relative h-screen w-screen">
-            <video
-              ref={videoRef}
-              autoPlay
-              playsInline
-              className="absolute left-0 top-0 -z-50"
-            />
-            <canvas
-              ref={canvasRef}
-              className="absolute left-0 top-0 h-full w-full"
-            />
-          </div>
-        </div>
-      )}
-      {result && (
-        <div className="flex justify-center flex-col">
-          <div className="text-center">
-            <p className="text-2xl mb-4">QRコードを読み取りました</p>
-            <p className="text-lg mb-4">送信先アドレス: {result}</p>
-          </div>
-          <PrimaryButton
-            buttonLabel="Send Your Money"
-            onClick={() => {
-              onSendTransaction();
-            }}
-            isLoading={false}
+      <div className="flex justify-center">
+        <div className="relative h-screen w-screen">
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            className="absolute left-0 top-0 -z-50"
           />
-
-          <SecondaryButton
-            buttonLabel="Re Scan QR"
-            onClick={() => onReScanButtonClick()}
+          <canvas
+            ref={canvasRef}
+            className="absolute left-0 top-0 h-full w-full"
           />
         </div>
-      )}
+      </div>
       {error && <p className="text-center text-xs text-red-500">{error}</p>}
     </div>
   );
