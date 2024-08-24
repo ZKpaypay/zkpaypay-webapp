@@ -49,13 +49,6 @@ Launch the development environment with the following command.
 npm run dev
 ```
 
-## Technologies Used
-
-- web3auth
-- rainbowkit
-- scroll (Sepolia)
-- cabinet
-
 ## For Developers
 
 ### Fetching the schema from supabase
