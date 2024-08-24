@@ -35,22 +35,22 @@ export type Database = {
           amount: number | null
           created_at: string
           id: number
-          receiver_address: string | null
-          sender_address: string | null
+          receiver_sub_domain: string | null
+          sender_sub_domain: string | null
         }
         Insert: {
           amount?: number | null
           created_at?: string
           id?: number
-          receiver_address?: string | null
-          sender_address?: string | null
+          receiver_sub_domain?: string | null
+          sender_sub_domain?: string | null
         }
         Update: {
           amount?: number | null
           created_at?: string
           id?: number
-          receiver_address?: string | null
-          sender_address?: string | null
+          receiver_sub_domain?: string | null
+          sender_sub_domain?: string | null
         }
         Relationships: []
       }

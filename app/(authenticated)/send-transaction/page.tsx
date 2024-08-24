@@ -1,8 +1,10 @@
 "use client";
 import PrimaryButton from "@/app/components/buttons/primary-button";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, use, useEffect, useState } from "react";
 import Image from "next/image";
+import { createClient } from "@/utils/supabase/client";
+import { useAccount } from "wagmi";
 
 // useSearchParamsを利用するためにSuspenseでラップする
 // https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
@@ -15,13 +17,30 @@ export default function SendTransactionPage() {
 }
 
 function SendTransaction() {
+  const account = useAccount();
   const router = useRouter();
   const routerParams = useSearchParams();
-  const address = routerParams.get("address");
+  const receiverSubDomain = routerParams.get("address");
+  const supabase = createClient();
 
-  const [isSendAmount, setIsSendAmount] = useState(100);
+  const [senderSubDomain, setSenderSubDomain] = useState("");
+  const [sendAmount, setSendAmount] = useState(100);
   const [isLoading, setIsLoading] = useState(false);
   const [isTransactionComplete, setIsTransactionComplete] = useState(false);
+
+  useEffect(() => {
+    // 送信者（自分）のENSドメインを取得
+    supabase
+      .from("accounts")
+      .select("sub_domain")
+      .eq("wallet_address", account.address!)
+      .single()
+      .then((response) => {
+        if (response.data) {
+          setSenderSubDomain(response.data.sub_domain || "");
+        }
+      });
+  }, [receiverSubDomain]);
 
   /**
    * 送金処理
@@ -29,6 +48,14 @@ function SendTransaction() {
   const onSendTransaction = async () => {
     setIsLoading(true);
     // 送金処理
+    await supabase.from("transaction_logs").insert([
+      {
+        sender_sub_domain: receiverSubDomain,
+        receiver_sub_domain: senderSubDomain,
+        amount: sendAmount,
+      },
+    ]);
+
     setIsLoading(false);
     setIsTransactionComplete(true);
   };
@@ -69,15 +96,15 @@ function SendTransaction() {
           <input
             className="appearance-none bg-transparent border-none text-gray-700 leading-tight focus:outline-none text-2xl text-right"
             type="number"
-            value={isSendAmount}
+            value={sendAmount}
             placeholder="100"
-            onChange={(e) => setIsSendAmount(Number(e.target.value))}
+            onChange={(e) => setSendAmount(Number(e.target.value))}
             disabled={isTransactionComplete || isLoading}
           />
         </div>
 
         <div className="mt-10 mb-4">to</div>
-        <div className="font-bold">{address}</div>
+        <div className="font-bold">{receiverSubDomain}</div>
         {/* 送金、ホームに戻るボタン */}
         <div className="fixed z-50 bottom-10">
           {isTransactionComplete ? (

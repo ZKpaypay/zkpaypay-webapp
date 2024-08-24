@@ -10,13 +10,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 interface TxRecord {
-  senderAddress: string;
+  transactionSubDomain: string;
   date: string;
   amount: number;
+  isSenderIsLoginUser: boolean; // 送信者がログインユーザーかどうか
 }
 
 function Page() {
   const [subDomain, setSubDomain] = useState("");
+  const [txRecords, setTxRecords] = useState<TxRecord[]>([]);
 
   const account = useAccount();
   const supabase = createClient();
@@ -41,26 +43,33 @@ function Page() {
           router.push("/create-domain");
         }
       });
-  }, []);
+  }, [account]);
 
-  // TODO: 本来はAPIから取得するが、サンプルデータを使用
-  const sampleTxRecord: TxRecord[] = [
-    {
-      senderAddress: "0x123456",
-      date: "2022/01/01",
-      amount: 100,
-    },
-    {
-      senderAddress: "0x654321",
-      date: "2022/01/02",
-      amount: 2200,
-    },
-    {
-      senderAddress: "0x123456",
-      date: "2022/01/03",
-      amount: 1300,
-    },
-  ];
+  useEffect(() => {
+    supabase
+      .from("transaction_logs")
+      .select("*")
+      .or(
+        `sender_sub_domain.eq.${subDomain},receiver_sub_domain.eq.${subDomain}`
+      )
+      .then((response) => {
+        if (response.data && response.data.length > 0) {
+          const _txRecords = response.data.map((data) => {
+            const isSenderIsLoginUser = data.sender_sub_domain === subDomain;
+            const transactionSubDomain = isSenderIsLoginUser // やりとりをした相手のサブドメイン
+              ? data.receiver_sub_domain
+              : data.sender_sub_domain;
+            return {
+              transactionSubDomain: transactionSubDomain,
+              date: data.created_at,
+              amount: data.amount,
+              isSenderIsLoginUser,
+            } as TxRecord;
+          }) as TxRecord[];
+          setTxRecords(_txRecords);
+        }
+      });
+  }, [account]);
 
   return (
     <>
@@ -78,12 +87,13 @@ function Page() {
           {/* 決済履歴表示エリア */}
           <div className="mt-12">
             <h2 className="text-l font-bold">Tx Record</h2>
-            {sampleTxRecord.map((txRecord, index) => (
+            {txRecords.map((txRecord, index) => (
               <TxRecordRow
                 key={index}
-                senderAddress={txRecord.senderAddress}
+                transactionSubDomain={txRecord.transactionSubDomain}
                 date={txRecord.date}
                 amount={txRecord.amount}
+                isSenderIsLoginUser={txRecord.isSenderIsLoginUser}
               />
             ))}
           </div>
