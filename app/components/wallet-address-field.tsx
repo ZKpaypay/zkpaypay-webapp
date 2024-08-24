@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import Modal from "react-modal";
 import QrCodeViewer from "./qr-code/qr-code-viewer";
 import { useWriteContract } from "wagmi";
+import { zkpaypayAbi } from "@/utils/abis/zkpaypay";
 
 const modalStyle = {
   overlay: {
@@ -21,7 +22,11 @@ const modalStyle = {
   },
 };
 
-export default function WalletAddressField({ address }: { address: string }) {
+export default function WalletAddressField({
+  subDomain,
+}: {
+  subDomain: string;
+}) {
   const { data: hash, isPending, writeContract } = useWriteContract();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [secretKey, setSecretKey] = useState("");
@@ -35,17 +40,23 @@ export default function WalletAddressField({ address }: { address: string }) {
     const random = Math.floor(Math.random() * 25) + 1;
     const _secretKey = random.toString();
     setSecretKey(_secretKey);
-    setIsOpen(true);
 
     // TODO: ここでコントラクトに秘密鍵を送信する処理を実装
-    console.log("Register Receiver SecretKey", secretKey);
-    // writeContract({
-    //   address: address,
-    //   abi: abi, // TODO: 変更の可能性あり
-    //   functionName: "registerKey", // TODO: 変更の可能性あり
-    //   args: [_secretKey],
-    // });
+    writeContract({
+      address: process.env
+        .NEXT_PUBLIC_ZKPAYPAY_CONTRACT_ADDRESS! as `0x${string}`,
+      abi: zkpaypayAbi,
+      functionName: "storePrivateKey",
+      args: [_secretKey],
+    });
   };
+
+  useEffect(() => {
+    // トランザクションの発行が完了したら、モーダルを表示
+    if (hash) {
+      setIsOpen(true);
+    }
+  }, [hash]);
 
   return (
     <form className="w-full max-w-sm">
@@ -53,7 +64,7 @@ export default function WalletAddressField({ address }: { address: string }) {
         <input
           className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
           type="text"
-          value={address}
+          value={subDomain}
           placeholder="test.zkpayuser.eth"
           disabled
         />
@@ -97,7 +108,7 @@ export default function WalletAddressField({ address }: { address: string }) {
 
             <div className="mt-10 flex justify-center text-center">
               <QrCodeViewer
-                address={address}
+                address={subDomain}
                 secretKey={secretKey}
               ></QrCodeViewer>
             </div>

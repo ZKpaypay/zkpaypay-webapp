@@ -83,7 +83,7 @@ function Page() {
     <>
       <div className="mt-32 flex justify-center items-center flex-col">
         <div className="min-w-[400px]">
-          <WalletAddressField address={subDomain} />
+          <WalletAddressField subDomain={subDomain} />
           {/* 残高表示エリア */}
           <div className="mt-4">
             <p>S-JPY Balance</p>
