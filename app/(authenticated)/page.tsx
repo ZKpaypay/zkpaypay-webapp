@@ -19,10 +19,10 @@ interface TxRecord {
 function Page() {
   const [subDomain, setSubDomain] = useState("");
   const [txRecords, setTxRecords] = useState<TxRecord[]>([]);
+  const [balance, setBalance] = useState(1000);
 
   const account = useAccount();
   const supabase = createClient();
-  const balance = 1000;
 
   // isConnectedがfalseの時/loginのページにリダイレクト
   const router = useRouter();
@@ -52,13 +52,20 @@ function Page() {
       .or(
         `sender_sub_domain.eq.${subDomain},receiver_sub_domain.eq.${subDomain}`
       )
+      // 新しい順に取得
+      .order("created_at", { ascending: false })
       .then((response) => {
         if (response.data && response.data.length > 0) {
+          // TODO: デモ用に残高を計算する
+          let newBalance = balance;
           const _txRecords = response.data.map((data) => {
             const isSenderIsLoginUser = data.sender_sub_domain === subDomain;
             const transactionSubDomain = isSenderIsLoginUser // やりとりをした相手のサブドメイン
               ? data.receiver_sub_domain
               : data.sender_sub_domain;
+            newBalance = isSenderIsLoginUser
+              ? newBalance - data.amount!
+              : newBalance + data.amount!;
             return {
               transactionSubDomain: transactionSubDomain,
               date: data.created_at,
@@ -67,9 +74,10 @@ function Page() {
             } as TxRecord;
           }) as TxRecord[];
           setTxRecords(_txRecords);
+          setBalance(newBalance);
         }
       });
-  }, [account]);
+  }, [subDomain]);
 
   return (
     <>
