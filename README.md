@@ -18,6 +18,16 @@
 
 - [zkpaypay/zkpaypay-contracts · GitHub](https://github.com/zkpaypay/zkpaypay-contracts)
 
+### 利用技術
+
+| 名称           | 用途                                 | URL                                           |
+| -------------- | ------------------------------------ | --------------------------------------------- |
+| Scroll Seporia | Plasma Next のコントラクトの実行基盤 | [scroll.io](https://scroll.io/)               |
+| Cabinet        | Scroll Seporia の RPC ノード         | [cabinet-node.com](https://cabinet-node.com/) |
+| ENS            | ウォレットアドレスの名前解決         | [ens.domains](https://ens.domains/)           |
+| rainbowkit     | ウォレット                           | [rainbowkit.io](https://rainbowkit.io/)       |
+| web3auth       | ウォレットプロバイダー               | [web3auth.io](https://web3auth.io/)           |
+
 ## Quick Start
 
 `.env.local`を作成し、以下の環境変数を設定する。
