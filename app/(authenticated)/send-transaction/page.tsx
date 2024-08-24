@@ -38,8 +38,6 @@ function SendTransaction() {
    */
   const onBackToHome = () => {
     router.push("/");
-    setIsLoading(false);
-    setIsTransactionComplete(false);
   };
 
   return (
