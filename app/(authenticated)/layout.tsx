@@ -12,7 +12,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Providers>
-          <main className="mx-8 flex justify-center flex-col">
+          <main className="flex justify-center flex-col">
             <div className="flex justify-end">
               <ConnectButton />
             </div>

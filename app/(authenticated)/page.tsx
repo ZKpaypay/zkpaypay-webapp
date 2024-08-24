@@ -90,7 +90,7 @@ function Page() {
         </div>
         <Link
           href="/scan-qr"
-          className="fixed z-50 bottom-10 right-10 p-5
+          className="fixed z-50 bottom-10 right-8 p-4
   border-2 bg-[#0027F3] rounded-full cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out"
         >
           <svg
