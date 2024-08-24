@@ -1,7 +1,7 @@
-import LoginHeader from "../../_components/login-header";
+import LoginHeader from "../../../components/login-header";
 import "@rainbow-me/rainbowkit/styles.css";
-import LoginButton from "@/app/_components/buttons/login-button";
-import LoginPageTitle from "@/app/_components/login-page-title";
+import LoginButton from "@/components/buttons/login-button";
+import LoginPageTitle from "@/components/typography/login-page-title";
 
 export default function Page() {
   return (
@@ -14,7 +14,7 @@ export default function Page() {
       </div>
       <div className="min-h-[70vh] flex justify-center items-center flex-col">
         <div className="mb-4">
-          <LoginPageTitle title={"Connect your wallet"}></LoginPageTitle>
+          <LoginPageTitle title={"Connect your wallet"} />
         </div>
         <div>
           <LoginButton />

@@ -1,5 +1,5 @@
 "use client";
-import PrimaryButton from "@/app/_components/buttons/primary-button";
+import PrimaryButton from "@/components/buttons/primary-button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 import Image from "next/image";

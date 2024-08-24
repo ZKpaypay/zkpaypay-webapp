@@ -1,12 +1,12 @@
 "use client";
 import "@rainbow-me/rainbowkit/styles.css";
 import { createClient } from "@/utils/supabase/client";
-import LoginHeader from "@/app/_components/login-header";
+import LoginHeader from "@/components/login-header";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import LoginPageTitle from "@/app/_components/login-page-title";
-import PrimaryButton from "@/app/_components/buttons/primary-button";
+import LoginPageTitle from "@/components/typography/login-page-title";
+import PrimaryButton from "@/components/buttons/primary-button";
 
 export default function CreateDomainPage() {
   const [isFirstLogin, setIsFirstLogin] = useState(false);
