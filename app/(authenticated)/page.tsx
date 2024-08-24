@@ -1,9 +1,9 @@
 "use client";
 
 import { useAccount } from "wagmi";
-import WalletAddressField from "../../components/wallet-address-field";
-import MoneyComponent from "../../components/typography/money";
-import TxRecordRow from "../../components/tx-record-row";
+import WalletAddressField from "../components/wallet-address-field";
+import MoneyComponent from "../components/typography/money";
+import TxRecordRow from "../components/tx-record-row";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";

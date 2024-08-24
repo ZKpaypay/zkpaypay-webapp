@@ -1,7 +1,7 @@
-import LoginHeader from "../../../components/login-header";
+import LoginHeader from "../../components/login-header";
 import "@rainbow-me/rainbowkit/styles.css";
-import LoginButton from "@/components/buttons/login-button";
-import LoginPageTitle from "@/components/typography/login-page-title";
+import LoginButton from "@/app/components/buttons/login-button";
+import LoginPageTitle from "@/app/components/typography/login-page-title";
 
 export default function Page() {
   return (

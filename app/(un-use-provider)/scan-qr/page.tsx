@@ -1,5 +1,5 @@
 "use client";
-import QrCodeReader from "@/components/qr-code/qr-code-reader";
+import QrCodeReader from "@/app/components/qr-code/qr-code-reader";
 import { useRouter } from "next/navigation";
 
 export default function ScanQr() {
