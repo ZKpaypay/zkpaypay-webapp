@@ -24,8 +24,6 @@ export default function CreateDomainPage() {
       .eq("wallet_address", account.address!)
       .then((response) => {
         if (response.data && response.data.length > 0) {
-          setSubDomain(response.data[0].sub_domain!);
-
           // アカウント作成済みの時は/のページにリダイレクト
           router.push("/");
         } else {
@@ -44,14 +42,17 @@ export default function CreateDomainPage() {
   const onClickRegister = async () => {
     setIsLoading(true);
     const fullSubDomain = `${subDomain}.zkpaypay.eth`;
-    await supabase.from("accounts").insert([
-      {
-        wallet_address: account.address,
-        sub_domain: fullSubDomain,
-      },
-    ]);
-
-    router.push("/");
+    await supabase
+      .from("accounts")
+      .insert([
+        {
+          wallet_address: account.address,
+          sub_domain: fullSubDomain,
+        },
+      ])
+      .then(() => {
+        router.push("/");
+      });
   };
 
   return (
@@ -70,7 +71,7 @@ export default function CreateDomainPage() {
                 ? "Checking Account..."
                 : "Request your ENS Sub-domain"
             }
-          ></LoginPageTitle>
+          />
         </div>
 
         <div>
