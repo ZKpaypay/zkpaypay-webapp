@@ -30,7 +30,7 @@ export default function WalletAddressField({ address }: { address: string }) {
           className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
           type="text"
           value={address}
-          placeholder="例: test.zkpayuser.eth"
+          placeholder="test.zkpayuser.eth"
           disabled
         />
         <div className="cursor-pointer hover:scale-110 transform transition duration-500 ease-in-out">

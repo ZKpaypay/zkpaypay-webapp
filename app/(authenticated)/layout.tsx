@@ -7,6 +7,9 @@ import "@rainbow-me/rainbowkit/styles.css";
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
+      <head>
+        <title>ZKpaypay</title>
+      </head>
       <body>
         <Providers>
           <main className="mx-8 flex justify-center flex-col">

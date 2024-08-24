@@ -59,7 +59,7 @@ export default function CreateDomainPage() {
         <LoginHeader></LoginHeader>
       </div>
       <div className="text-4xl font-normal leading-[36px] text-left text-[#0027F3]">
-        ZKPay
+        ZKpaypay
       </div>
       <div className="min-h-[50vh] flex justify-center items-center flex-col">
         <div className="mb-12 justify-start">
