@@ -1,6 +1,6 @@
 # zkppay
 
-- [デモページ](https://zkppay-webapp.vercel.app)
+- [デモページ](https://zkpaypay.vercel.app/)
 
 デプロイは以下の fork されたリポジトリの更新を行い、Vercel にデプロイされます。
 
