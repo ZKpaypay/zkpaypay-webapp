@@ -7,6 +7,7 @@ import TxRecordRow from "../_components/tx-record-row";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
+import QrCodeReader from "../_components/qr-code-reader";
 
 interface TxRecord {
   senderAddress: string;
@@ -86,6 +87,9 @@ function Page() {
               />
             ))}
           </div>
+        </div>
+        <div className="bg-white p-4 rounded-md">
+          <QrCodeReader />
         </div>
       </div>
     </>
