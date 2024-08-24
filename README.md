@@ -8,7 +8,15 @@
 
 ## 概要
 
-- web3auth を利用してログインし、Sepolia Scroll のテストネットに接続します。
+### 全体構成
+
+全体構成は以下の通りです。本リポジトリは図中のフロントエンドに該当します。
+
+![全体構成](./docs/arch.png)
+
+コントラクトについては以下のリポジトリを参照してください。
+
+- [zkpaypay/zkpaypay-contracts · GitHub](https://github.com/zkpaypay/zkpaypay-contracts)
 
 ## Quick Start
 
