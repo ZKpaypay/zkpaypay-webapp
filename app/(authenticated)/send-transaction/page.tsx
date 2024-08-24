@@ -50,8 +50,8 @@ function SendTransaction() {
     // 送金処理
     await supabase.from("transaction_logs").insert([
       {
-        sender_sub_domain: receiverSubDomain,
-        receiver_sub_domain: senderSubDomain,
+        sender_sub_domain: senderSubDomain,
+        receiver_sub_domain: receiverSubDomain,
         amount: sendAmount,
       },
     ]);
