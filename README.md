@@ -25,8 +25,8 @@ Contracts deployed on the Sepolia Scroll testnet are as follows.
 
 | Contract Name | Address                                      | URL                                                                                             |
 | ------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Scroll JPY    | `0xba3e23dd4263ecfaf6e861a0a2c468c2ee2c3186` | [ScrollScan](https://sepolia.scrollscan.com/token/0xba3e23dd4263ecfaf6e861a0a2c468c2ee2c3186)   |
-| ZKpaypay      | `0x5C848dcFf45257c7758dEdF1e975026b1dfE2db1` | [ScrollScan](https://sepolia.scrollscan.com/address/0x5C848dcFf45257c7758dEdF1e975026b1dfE2db1) |
+| Scroll JPY    | `0xba3e23dd4263ecfaf6e861a0a2c468c2ee2c3186` | [Scrollscan](https://sepolia.scrollscan.com/address/0xba3e23dd4263ecfaf6e861a0a2c468c2ee2c3186) |
+| ZKpaypay      | `0x5C848dcFf45257c7758dEdF1e975026b1dfE2db1` | [Scrollscan](https://sepolia.scrollscan.com/address/0x5C848dcFf45257c7758dEdF1e975026b1dfE2db1) |
 
 For information about contracts, please refer to the following repository.
 
