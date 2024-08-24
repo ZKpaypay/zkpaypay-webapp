@@ -10,7 +10,7 @@ export default function LoginButton() {
 
   // isConnectedがfalseの時/のページにリダイレクト
   if (account.isConnected) {
-    router.push("/");
+    router.push("/create-domain");
   }
 
   return account.isConnected ? (
