@@ -1,8 +1,8 @@
 "use client";
 import jsQR from "jsqr";
 import React, { useRef, useState, useEffect, FC } from "react";
-import SecondaryButton from "./buttons/secondary-button";
-import PrimaryButton from "./buttons/primary-button";
+import SecondaryButton from "../buttons/secondary-button";
+import PrimaryButton from "../buttons/primary-button";
 
 export default function QrCodeReader({
   onQRReadCompleteButton,

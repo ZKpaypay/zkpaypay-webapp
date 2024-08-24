@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import Modal from "react-modal";
-import QrCodeViewer from "./qr-code-viewer";
+import QrCodeViewer from "./qr-code/qr-code-viewer";
 
 const modalStyle = {
   overlay: {
