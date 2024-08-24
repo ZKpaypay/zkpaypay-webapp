@@ -2,7 +2,8 @@
 
 [Demo Page](https://zkpaypay.vercel.app/)
 
-[!['Demo movie']('')](https://www.youtube.com/watch?v=48rIRuYaeLU)
+Youtube Demo Movie is below.
+[![Demo movie](./docs/youtube_thumbnail.png)](https://www.youtube.com/watch?v=48rIRuYaeLU)
 
 Deployment is done by updating the forked repository below and deploying to Vercel.
 
