@@ -9,6 +9,7 @@ import LoginPageTitle from "@/app/_components/login-page-title";
 
 export default function CreateDomainPage() {
   const [isFirstLogin, setIsFirstLogin] = useState(false);
+  const [isFirstLoading, setIsFirstLoading] = useState(true);
   const [subDomain, setSubDomain] = useState("");
 
   const account = useAccount();
@@ -27,7 +28,9 @@ export default function CreateDomainPage() {
           // アカウント作成済みの時は/のページにリダイレクト
           router.push("/");
         } else {
+          // ローディング状態を終了し、サブドメインを入力するフォームを表示
           setIsFirstLogin(true);
+          setIsFirstLoading(false);
         }
       });
   }, []);
@@ -61,12 +64,17 @@ export default function CreateDomainPage() {
       <div className="min-h-[50vh] flex justify-center items-center flex-col">
         <div className="mb-12 justify-start">
           <LoginPageTitle
-            title={"Request your ENS Sub-domain"}
+            title={
+              isFirstLoading
+                ? "Checking Account..."
+                : "Request your ENS Sub-domain"
+            }
           ></LoginPageTitle>
         </div>
 
         <div>
-          {isFirstLogin ? (
+          {/* 初回ログイン時のサブドメイン登録フォーム */}
+          {isFirstLogin && (
             <div>
               <div className="flex items-center border-b border-teal-500 py-2">
                 <input
@@ -112,8 +120,6 @@ export default function CreateDomainPage() {
                 </button>
               </div>
             </div>
-          ) : (
-            <span>Loading...</span>
           )}
         </div>
       </div>
