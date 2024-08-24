@@ -1,66 +1,66 @@
-# zkppay
+# ZKpaypay
 
-- [デモページ](https://zkpaypay.vercel.app/)
+- [Demo Page](https://zkpaypay.vercel.app/)
 
-デプロイは以下の fork されたリポジトリの更新を行い、Vercel にデプロイされます。
+Deployment is done by updating the forked repository below and deploying to Vercel.
 
-- [GitHub - sey323/zkppay-webapp: Vercel deploy 用のリポジトリ](https://github.com/sey323/zkppay-webapp)
+- [GitHub - sey323/zkpaypay-webapp: Repository for Vercel deployment](https://github.com/sey323/zkpaypay-webapp)
 
-## 概要
+## Overview
 
-### 全体構成
+### System Architecture
 
-全体構成は以下の通りです。本リポジトリは図中のフロントエンドに該当します。
+The overall architecture is as follows. This repository corresponds to the Frontend in the diagram.
 
-![全体構成](./docs/arch.png)
+![System Architecture](./docs/arch.png)
 
-コントラクトについては以下のリポジトリを参照してください。
+For information about contracts, please refer to the following repository.
 
 - [zkpaypay/zkpaypay-contracts · GitHub](https://github.com/zkpaypay/zkpaypay-contracts)
 
-### 利用技術
+### Technologies Used
 
-| 名称           | 用途                                 | URL                                           |
-| -------------- | ------------------------------------ | --------------------------------------------- |
-| Scroll Seporia | Plasma Next のコントラクトの実行基盤 | [scroll.io](https://scroll.io/)               |
-| Cabinet        | Scroll Seporia の RPC ノード         | [cabinet-node.com](https://cabinet-node.com/) |
-| ENS            | ウォレットアドレスの名前解決         | [ens.domains](https://ens.domains/)           |
-| rainbowkit     | ウォレット                           | [rainbowkit.io](https://rainbowkit.io/)       |
-| web3auth       | ウォレットプロバイダー               | [web3auth.io](https://web3auth.io/)           |
+| Technology     | Use                                     | URL                                           |
+| -------------- | --------------------------------------- | --------------------------------------------- |
+| Scroll Seporia | Execution base of Plasma Next Contracts | [scroll.io](https://scroll.io/)               |
+| Cabinet        | RPC Node for Scroll Seporia             | [cabinet-node.com](https://cabinet-node.com/) |
+| ENS            | Name resolution of wallet addresses     | [ens.domains](https://ens.domains/)           |
+| rainbowkit     | Wallet                                  | [rainbowkit.io](https://rainbowkit.io/)       |
+| web3auth       | Wallet provider                         | [web3auth.io](https://web3auth.io/)           |
 
 ## Quick Start
 
-`.env.local`を作成し、以下の環境変数を設定する。
+Create `.env.local` and set the following environment variables.
 
 ```bash
-# https://app.cabinet-node.com/ で発行したSeporia Scroll の RPC JSONのAPIキー
+# Seporia Scroll's RPC JSON API key issued at https://app.cabinet-node.com/
 NEXT_PUBLIC_CABINET_SCROLL_SEPORIA_RPC_JSON_API_KEY=${JSON API Key}
-# https://dashboard.web3auth.io/ で登録したアプリケーションの Client Secret
+# The Client Secret of the application registered at https://dashboard.web3auth.io/
 NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=${Client ID}
 
-# Supabase の設定
+# Supabase settings
 NEXT_PUBLIC_SUPABASE_URL=${Supabase URL}
 NEXT_PUBLIC_SUPABASE_ANON_KEY=${Supabase Anon Key}
 ```
 
-以下のコマンドで開発環境を起動する。
+Launch the development environment with the following command.
 
 ```bash
 npm run dev
 ```
 
-## 利用技術
+## Technologies Used
 
 - web3auth
 - rainbowkit
 - scroll (Sepolia)
 - cabinet
 
-## 開発者向け
+## For Developers
 
-### supabase からスキーマの取得
+### Fetching the schema from supabase
 
-以下のコマンドを実行し、`database.types.ts`を生成する。
+Run the following command and generate `database.types.ts`.
 
 ```bash
 supabase gen types --lang=typescript --project-id xttxgubekhgwkbvseoxw --schema public > database.types.ts
