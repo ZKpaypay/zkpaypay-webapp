@@ -30,6 +30,30 @@ export type Database = {
         }
         Relationships: []
       }
+      transaction_logs: {
+        Row: {
+          amount: number | null
+          created_at: string
+          id: number
+          receiver_address: string | null
+          sender_address: string | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          id?: number
+          receiver_address?: string | null
+          sender_address?: string | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          id?: number
+          receiver_address?: string | null
+          sender_address?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
