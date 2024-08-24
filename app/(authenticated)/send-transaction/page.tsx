@@ -37,9 +37,9 @@ function SendTransaction() {
    * 送金処理完了後、ホームに戻るボタンの処理
    */
   const onBackToHome = () => {
+    router.push("/");
     setIsLoading(false);
     setIsTransactionComplete(false);
-    router.push("/");
   };
 
   return (
