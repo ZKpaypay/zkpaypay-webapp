@@ -5,6 +5,7 @@ import LoginHeader from "@/app/_components/login-header";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import LoginPageTitle from "@/app/_components/login-page-title";
 
 export default function CreateDomainPage() {
   const [isFirstLogin, setIsFirstLogin] = useState(false);
@@ -59,13 +60,9 @@ export default function CreateDomainPage() {
       </div>
       <div className="min-h-[50vh] flex justify-center items-center flex-col">
         <div className="mb-12 justify-start">
-          <span className="text-2xl font-bold leading-[36px] text-left ">
-            Request your
-          </span>
-          <br />
-          <span className="text-2xl font-bold leading-[36px] text-left ">
-            ENS Sub-domain
-          </span>
+          <LoginPageTitle
+            title={"Request your ENS Sub-domain"}
+          ></LoginPageTitle>
         </div>
 
         <div>
